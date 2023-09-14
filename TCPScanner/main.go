@@ -6,6 +6,8 @@ import (
 	"sort"
 )
 
+const WORKERS_COUNT = 100
+
 func worker(ports, results chan int) {
 	target := "127.0.0.1"
 	for p := range ports {
@@ -25,7 +27,7 @@ func main() {
 	results := make(chan int)
 	var openports []int
 
-	for i := 0; i < 20; i++ {
+	for i := 0; i < WORKERS_COUNT; i++ {
 		go worker(ports, results)
 	}
 
